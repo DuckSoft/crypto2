@@ -44,6 +44,11 @@ pub(crate) mod aarch64 {
         u8, u8 ,u8, u8, u8, u8 ,u8, u8,
     );
 
+    /// ARM-specific 128-bit wide vector of four packed `u32`.
+    #[repr(simd)]
+    #[derive(Debug, Clone, Copy)]
+    pub struct uint32x4_t(u32, u32, u32, u32);
+
     /// ARM-specific 128-bit wide vector of two packed `u64`.
     #[repr(simd)]
     #[derive(Debug, Clone, Copy)]
@@ -70,5 +75,12 @@ pub(crate) mod aarch64 {
         fn vaesimcq_u8(data: uint8x16_t) -> uint8x16_t;
         fn vaesdq_u8(data: uint8x16_t, key: uint8x16_t) -> uint8x16_t;
         fn vandq_u8(a: uint8x16_t, b: uint8x16_t) -> uint8x16_t;
+
+        fn vaddq_u32(a: uint32x4_t, b: uint32x4_t) -> uint32x4_t;
+        fn vsha256su0q_u32(w0_3: uint32x4_t, w4_7: uint32x4_t) -> uint32x4_t;
+        fn vsha256hq_u32(hash_abcd: uint32x4_t, hash_efgh: uint32x4_t, wk: uint32x4_t) -> uint32x4_t;
+        fn vsha256h2q_u32(hash_efgh: uint32x4_t, hash_abcd: uint32x4_t, wk: uint32x4_t) -> uint32x4_t;
+        fn vsha256su1q_u32(tw0_3: uint32x4_t, w8_11: uint32x4_t, w12_15: uint32x4_t) -> uint32x4_t;
+        fn vsha256su0q_u32(w0_3: uint32x4_t, w4_7: uint32x4_t) -> uint32x4_t;
     }
 }

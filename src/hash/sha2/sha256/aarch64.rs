@@ -2,7 +2,9 @@ use super::K32;
 use super::Sha256;
 
 
-use core::arch::aarch64::*;
+// use core::arch::aarch64::*;
+#[cfg(target_arch = "aarch64")]
+use crate::aarch64::*;
 
 
 #[inline]
