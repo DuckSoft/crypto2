@@ -5,7 +5,7 @@ dist: bionic
 language: rust
 cache: cargo
 rust:
-  - nightly
+  - stable
 matrix:
   fast_finish: false
   script:
