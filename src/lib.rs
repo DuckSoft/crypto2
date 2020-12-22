@@ -62,23 +62,23 @@ pub(crate) mod aarch64 {
 
     #[link(name = "libneon")]
     extern "C" {
-        pub unsafe fn vrbitq_u8(a: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vreinterpretq_u64_u8(a: uint8x16_t) -> uint64x2_t;
-        pub unsafe fn vgetq_lane_u64(v: uint64x2_t, imm5: i32) -> u64;
-        pub unsafe fn vmull_p64(a: u64, b: u64) -> u128;
-        pub unsafe fn veorq_u8(a: uint8x16_t, b: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vdupq_n_u8(value: u8) -> uint8x16_t;
-        pub unsafe fn vextq_u8(a: uint8x16_t, b: uint8x16_t, n: i32) -> uint8x16_t;
-        pub unsafe fn vld1q_u8(ptr: *const u8) -> uint8x16_t;
-        pub unsafe fn vaeseq_u8(data: uint8x16_t, key: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vaesmcq_u8(data: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vaesimcq_u8(data: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vaesdq_u8(data: uint8x16_t, key: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vandq_u8(a: uint8x16_t, b: uint8x16_t) -> uint8x16_t;
-        pub unsafe fn vaddq_u32(a: uint32x4_t, b: uint32x4_t) -> uint32x4_t;
-        pub unsafe fn vsha256su0q_u32(w0_3: uint32x4_t, w4_7: uint32x4_t) -> uint32x4_t;
-        pub unsafe fn vsha256hq_u32(hash_abcd: uint32x4_t, hash_efgh: uint32x4_t, wk: uint32x4_t) -> uint32x4_t;
-        pub unsafe fn vsha256h2q_u32(hash_efgh: uint32x4_t, hash_abcd: uint32x4_t, wk: uint32x4_t) -> uint32x4_t;
-        pub unsafe fn vsha256su1q_u32(tw0_3: uint32x4_t, w8_11: uint32x4_t, w12_15: uint32x4_t) -> uint32x4_t;
+        pub fn vrbitq_u8(a: uint8x16_t) -> uint8x16_t;
+        pub fn vreinterpretq_u64_u8(a: uint8x16_t) -> uint64x2_t;
+        pub fn vgetq_lane_u64(v: uint64x2_t, imm5: i32) -> u64;
+        pub fn vmull_p64(a: u64, b: u64) -> u128;
+        pub fn veorq_u8(a: uint8x16_t, b: uint8x16_t) -> uint8x16_t;
+        pub fn vdupq_n_u8(value: u8) -> uint8x16_t;
+        pub fn vextq_u8(a: uint8x16_t, b: uint8x16_t, n: i32) -> uint8x16_t;
+        pub fn vld1q_u8(ptr: *const u8) -> uint8x16_t;
+        pub fn vaeseq_u8(data: uint8x16_t, key: uint8x16_t) -> uint8x16_t;
+        pub fn vaesmcq_u8(data: uint8x16_t) -> uint8x16_t;
+        pub fn vaesimcq_u8(data: uint8x16_t) -> uint8x16_t;
+        pub fn vaesdq_u8(data: uint8x16_t, key: uint8x16_t) -> uint8x16_t;
+        pub fn vandq_u8(a: uint8x16_t, b: uint8x16_t) -> uint8x16_t;
+        pub fn vaddq_u32(a: uint32x4_t, b: uint32x4_t) -> uint32x4_t;
+        pub fn vsha256su0q_u32(w0_3: uint32x4_t, w4_7: uint32x4_t) -> uint32x4_t;
+        pub fn vsha256hq_u32(hash_abcd: uint32x4_t, hash_efgh: uint32x4_t, wk: uint32x4_t) -> uint32x4_t;
+        pub fn vsha256h2q_u32(hash_efgh: uint32x4_t, hash_abcd: uint32x4_t, wk: uint32x4_t) -> uint32x4_t;
+        pub fn vsha256su1q_u32(tw0_3: uint32x4_t, w8_11: uint32x4_t, w12_15: uint32x4_t) -> uint32x4_t;
     }
 }
