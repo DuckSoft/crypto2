@@ -39,6 +39,7 @@ pub(crate) mod aarch64 {
 
     /// ARM-specific 128-bit wide vector of sixteen packed `u8`.
     // #[repr(simd)]
+    #[repr(C)]
     #[derive(Debug, Clone, Copy)]
     pub struct uint8x16_t(
         u8, u8 ,u8, u8, u8, u8 ,u8, u8,
@@ -47,16 +48,19 @@ pub(crate) mod aarch64 {
 
     /// ARM-specific 128-bit wide vector of four packed `u32`.
     // #[repr(simd)]
+    #[repr(C)]
     #[derive(Debug, Clone, Copy)]
     pub struct uint32x4_t(u32, u32, u32, u32);
 
     /// ARM-specific 128-bit wide vector of two packed `u64`.
     // #[repr(simd)]
+    #[repr(C)]
     #[derive(Debug, Clone, Copy)]
     pub struct uint64x2_t(u64, u64);
 
     /// ARM-specific 128-bit wide vector of two packed `p64`.
     // #[repr(simd)]
+    #[repr(C)]
     #[derive(Debug, Clone, Copy)]
     pub struct poly64x2_t(p64, p64);
 
