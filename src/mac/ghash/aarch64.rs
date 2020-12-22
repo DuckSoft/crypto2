@@ -1,8 +1,14 @@
 use crate::mem::Zeroize;
 
+// #[cfg(target_arch = "aarch64")]
+// use core::arch::aarch64::*;
 #[cfg(target_arch = "aarch64")]
-use core::arch::aarch64::*;
+use crate::aarch64::*;
+
 use core::mem::transmute;
+
+
+
 
 
 // 参考: https://github.com/noloader/AES-Intrinsics/blob/master/clmul-arm.c
@@ -26,19 +32,19 @@ unsafe fn pmull2(a: uint8x16_t, b: uint8x16_t) -> uint8x16_t {
     transmute(vmull_p64(a, b))
 }
 
-// reverse bits in each byte to convert from gcm format to little-little endian
-unsafe fn vrbitq_u8(a: uint8x16_t) -> uint8x16_t {
-    let result: uint8x16_t;
+// // reverse bits in each byte to convert from gcm format to little-little endian
+// unsafe fn vrbitq_u8(a: uint8x16_t) -> uint8x16_t {
+//     let result: uint8x16_t;
 
-    // rbit v0.16b, v0.16b
-    llvm_asm!("rbit v0.16b, v0.16b"
-        : "=w" (result)
-        : "w"(a)
-        :
-        );
+//     // rbit v0.16b, v0.16b
+//     llvm_asm!("rbit v0.16b, v0.16b"
+//         : "=w" (result)
+//         : "w"(a)
+//         :
+//         );
 
-    result
-}
+//     result
+// }
 
 
 // Perform the multiplication and reduction in GF(2^128)

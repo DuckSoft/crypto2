@@ -1,7 +1,10 @@
 use crate::mem::Zeroize;
 
+// #[cfg(target_arch = "aarch64")]
+// use core::arch::aarch64::*;
 #[cfg(target_arch = "aarch64")]
-use core::arch::aarch64::*;
+use crate::aarch64::*;
+
 use core::mem::transmute;
 
 
