@@ -410,7 +410,7 @@ A5DDBFC5787E50B5CC55EE507BCB084E479AD363AC366B95\
 A98CA5F3000B1479").unwrap();
     let ret = cipher.decrypt_slice(&nonce, &aad, &mut ciphertext_and_tag);
     assert_eq!(ret, true);
-    assert_eq!(&ciphertext_and_tag[..plen], &plaintext);
+    assert_eq!(&ciphertext_and_tag[..plen], &plaintext[..]);
 }
 
 #[test]
