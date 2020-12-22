@@ -33,6 +33,7 @@ pub mod openssh;
 
 
 #[cfg(target_arch = "aarch64")]
+#[allow(non_camel_case_types)]
 pub(crate) mod aarch64 {
     pub type p64 = u64;
 
