@@ -113,15 +113,16 @@ impl Md5 {
         let mlen_bits = mlen * 8;           // in bits
 
         let plen_bits = 512 - (mlen_bits + 64 + 1) % 512 + 1; // pad len, in bits
-        assert_eq!(plen_bits % 8, 0);
+        debug_assert_eq!(plen_bits % 8, 0);
         let plen = plen_bits / 8; // pad len, in bytes
+        debug_assert!(plen > 1);
 
-        // NOTE: MLEN + PLEN + MLEN_OCTETS (the length of the message before the padding bits were added)
-        let dlen = mlen + plen + 8;
-
-        assert_eq!(dlen % Self::BLOCK_LEN, 0);
-        assert!(plen > 1);
-
+        if cfg!(debug_assertions) {
+            // NOTE: MLEN + PLEN + MLEN_OCTETS (the length of the message before the padding bits were added)
+            let dlen = mlen + plen + 8;
+            debug_assert_eq!(dlen % Self::BLOCK_LEN, 0);
+        }
+        
         let mut padding_block: [u8; Self::BLOCK_LEN * 2] = [
             0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -140,17 +141,16 @@ impl Md5 {
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-
         ];
-
+        
         let mlen_octets = u64::try_from(mlen_bits).unwrap();
         padding_block[plen..plen + 8].copy_from_slice(&mlen_octets.to_le_bytes());
         
         let data = &padding_block[..plen + 8];
         self.update(data);
-
-        assert_eq!(self.offset, 0);
-
+        
+        debug_assert_eq!(self.offset, 0);
+        
         let mut output = [0u8; Self::DIGEST_LEN];
         output[ 0.. 4].copy_from_slice(&self.state[0].to_le_bytes());
         output[ 4.. 8].copy_from_slice(&self.state[1].to_le_bytes());
@@ -429,17 +429,4 @@ fn test_md5_long_message() {
     let msg = vec![b'a'; 1000_000];
     let digest = [119, 7, 214, 174, 78, 2, 124, 112, 238, 162, 169, 53, 194, 41, 111, 33];
     assert_eq!(Md5::oneshot(&msg), digest);
-}
-
-#[test]
-fn test_md5_oneshot() {
-    let mut m1 = Md5::new();
-    m1.update(&hex::decode("4b01a2d762fada9ede4d1034a13dc69c").unwrap());
-    m1.update(&hex::decode("496d616b65746869735f4c6f6e6750617373506872617365466f725f7361666574795f323031395f30393238405f4021").unwrap());
-    let h1 = m1.finalize();
-
-    let h2 = Md5::oneshot(&hex::decode("4b01a2d762fada9ede4d1034a13dc69c\
-496d616b65746869735f4c6f6e6750617373506872617365466f725f7361666574795f323031395f30393238405f4021").unwrap());
-
-    assert_eq!(h1, h2);
 }

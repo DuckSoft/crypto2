@@ -83,7 +83,6 @@ impl Md2 {
         Self {
             buffer: [0u8; Self::BLOCK_LEN],
             state: [0u8; 64],
-            // len: 0usize,
             offset: 0usize,
         }
     }
