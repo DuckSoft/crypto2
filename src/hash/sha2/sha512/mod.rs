@@ -147,6 +147,7 @@ impl Sha512 {
         }
     }
 
+
     
     pub fn update(&mut self, data: &[u8]) {
         let mut i = 0usize;
