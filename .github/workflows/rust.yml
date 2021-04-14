@@ -29,7 +29,7 @@ jobs:
     - uses: actions-rs/clippy-check@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        args: --all-features -W clippy::all
+        args: --all-features -- -W clippy::all -Z macro-backtrace --verbose
     - name: Build
       run: cargo build --verbose
     - name: Test
