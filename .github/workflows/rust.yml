@@ -30,7 +30,10 @@ jobs:
       with:
         name: clippy-${{ matrix.platform }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        args: --all-features -- -Z macro-backtrace --verbose
+        args: |
+          --all-features --verbose -- -Z macro-backtrace 
+          -W clippy::absurd_extreme_comparisons
+          -W clippy::erasing_op
     - name: Build
       run: cargo build --verbose
     - name: Test
