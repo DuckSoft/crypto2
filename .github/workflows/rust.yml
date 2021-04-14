@@ -28,8 +28,9 @@ jobs:
         override: true
     - uses: actions-rs/clippy-check@v1
       with:
+        name: clippy-${{ matrix.platform }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        args: --all-features -- -W clippy::all -Z macro-backtrace --verbose
+        args: --all-features -- -Z macro-backtrace --verbose
     - name: Build
       run: cargo build --verbose
     - name: Test
