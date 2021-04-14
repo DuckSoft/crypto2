@@ -146,6 +146,7 @@ impl Sha512 {
             offset: 0,
         }
     }
+
     
     pub fn update(&mut self, data: &[u8]) {
         let mut i = 0usize;
@@ -240,7 +241,7 @@ impl Sha512 {
         output[56..64].copy_from_slice(&self.state[7].to_be_bytes());
         output
     }
-    
+
     pub fn oneshot<T: AsRef<[u8]>>(data: T) -> [u8; Self::DIGEST_LEN] {
         let mut m = Self::new();
         m.update(data.as_ref());
