@@ -26,8 +26,14 @@ jobs:
         toolchain: nightly
         components: clippy
         override: true
-    - name: Check
-      run: cargo clippy -- -W clippy::all -Z macro-backtrace --verbose
+    - uses: actions-rs/clippy-check@v1
+      with:
+        name: clippy-${{ matrix.platform }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        args: |
+          --all-features --verbose -- -Z macro-backtrace 
+          -W clippy::absurd_extreme_comparisons
+          -W clippy::erasing_op
     - name: Build
       run: cargo build --verbose
     - name: Test
